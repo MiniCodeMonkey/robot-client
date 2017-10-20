@@ -1,0 +1,14 @@
+{
+    "name": "minicodemonkey/hetzner-robot",
+    "description": "API Client for the Hetzner Robot API",
+    "version": "1.0.0",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Hetzner\\Robot\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
