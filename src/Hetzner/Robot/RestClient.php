@@ -25,7 +25,7 @@ namespace Hetzner\Robot;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class RobotRestClient
+class RestClient
 {
   private $curl;
   private $curlOptions  = array();
