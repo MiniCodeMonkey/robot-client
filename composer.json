@@ -1,7 +1,7 @@
 {
     "name": "minicodemonkey/hetzner-robot",
     "description": "API Client for the Hetzner Robot API",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
         "php": ">=5.4.0"
     },

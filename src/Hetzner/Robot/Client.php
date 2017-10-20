@@ -29,7 +29,7 @@ use stdClass;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class Client extends RobotRestClient
+class Client extends RestClient
 {
   const VERSION = '2017.05';
 
