@@ -53,7 +53,7 @@ class Client extends RestClient
    *
    * @return object Response
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   protected function executeRequest()
   {
@@ -61,7 +61,7 @@ class Client extends RestClient
 
     if ($result['response'] === false)
     {
-      throw new RobotClientException('robot not reachable', 'NOT_REACHABLE');
+      throw new ClientException('robot not reachable', 'NOT_REACHABLE');
     }
 
     if (empty($result['response']))
@@ -75,12 +75,12 @@ class Client extends RestClient
 
     if ($response === null)
     {
-      throw new RobotClientException('response can not be decoded', 'RESPONSE_DECODE_ERROR');
+      throw new ClientException('response can not be decoded', 'RESPONSE_DECODE_ERROR');
     }
 
     if ($result['response_code'] >= 400 && $result['response_code'] <= 503)
     {
-      throw new RobotClientException($response->error->message, $response->error->code);
+      throw new ClientException($response->error->message, $response->error->code);
     }
 
     return $response;
@@ -94,7 +94,7 @@ class Client extends RestClient
    *
    * @return object Failover object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function failoverGet($ip = null, array $query = null)
   {
@@ -119,7 +119,7 @@ class Client extends RestClient
    *
    * @return object Failover object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function failoverGetByServerIp($serverIp)
   {
@@ -134,7 +134,7 @@ class Client extends RestClient
    *
    * @return object Failover object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function failoverRoute($failoverIp, $activeServerIp)
   {
@@ -150,7 +150,7 @@ class Client extends RestClient
    *
    * @return object Reset object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function resetGet($ip = null)
   {
@@ -171,7 +171,7 @@ class Client extends RestClient
    *
    * @return object Reset object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function resetExecute($ip, $type)
   {
@@ -187,7 +187,7 @@ class Client extends RestClient
    *
    * @return object Boot object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function bootGet($ip)
   {
@@ -203,7 +203,7 @@ class Client extends RestClient
    *
    * @return object Rescue object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rescueGet($ip)
   {
@@ -222,7 +222,7 @@ class Client extends RestClient
    *
    * @return object Rescue object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rescueActivate($ip, $os, $arch, array $authorizedKeys = array())
   {
@@ -238,7 +238,7 @@ class Client extends RestClient
    *
    * @return object Rescue object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rescueDeactivate($ip)
   {
@@ -254,7 +254,7 @@ class Client extends RestClient
    *
    * @return object Rescue object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rescueGetLast($ip)
   {
@@ -270,7 +270,7 @@ class Client extends RestClient
    *
    * @return object Linux object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function linuxGet($ip)
   {
@@ -290,7 +290,7 @@ class Client extends RestClient
    *
    * @return object Linux object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function linuxActivate($ip, $dist, $arch, $lang, array $authorizedKeys = array())
   {
@@ -311,7 +311,7 @@ class Client extends RestClient
    *
    * @return object Linux object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function linuxDeactivate($ip)
   {
@@ -327,7 +327,7 @@ class Client extends RestClient
    *
    * @return object Rescue object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function linuxGetLast($ip)
   {
@@ -343,7 +343,7 @@ class Client extends RestClient
    *
    * @return object Vnc object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vncGet($ip)
   {
@@ -362,7 +362,7 @@ class Client extends RestClient
    *
    * @return object Vnc object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vncActivate($ip, $dist, $arch, $lang)
   {
@@ -382,7 +382,7 @@ class Client extends RestClient
    *
    * @return object Vnc object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vncDeactivate($ip)
   {
@@ -398,7 +398,7 @@ class Client extends RestClient
    *
    * @return object Windows object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function windowsGet($ip)
   {
@@ -415,7 +415,7 @@ class Client extends RestClient
    *
    * @return object Windows object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function windowsActivate($ip, $lang)
   {
@@ -431,7 +431,7 @@ class Client extends RestClient
    *
    * @return object Windows object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function windowsDeactivate($ip)
   {
@@ -447,7 +447,7 @@ class Client extends RestClient
    *
    * @return object cPanel object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function cpanelGet($ip)
   {
@@ -467,7 +467,7 @@ class Client extends RestClient
    *
    * @return object cPanel object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function cpanelActivate($ip, $dist, $arch, $lang, $hostname)
   {
@@ -488,7 +488,7 @@ class Client extends RestClient
    *
    * @return object cPanel object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function cpanelDeactivate($ip)
   {
@@ -504,7 +504,7 @@ class Client extends RestClient
    *
    * @return object Plesk object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function pleskGet($ip)
   {
@@ -524,7 +524,7 @@ class Client extends RestClient
    *
    * @return object Plesk object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function pleskActivate($ip, $dist, $arch, $lang, $hostname)
   {
@@ -545,7 +545,7 @@ class Client extends RestClient
    *
    * @return object Plesk object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function pleskDeactivate($ip)
   {
@@ -561,7 +561,7 @@ class Client extends RestClient
    *
    * @return object Wol object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function wolGet($ip)
   {
@@ -577,7 +577,7 @@ class Client extends RestClient
    *
    * @return object Wol object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function wolSend($ip)
   {
@@ -593,7 +593,7 @@ class Client extends RestClient
    *
    * @return object Rdns object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rdnsGet($ip)
   {
@@ -610,7 +610,7 @@ class Client extends RestClient
    *
    * @return object Rdns object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rdnsCreate($ip, $ptr)
   {
@@ -627,7 +627,7 @@ class Client extends RestClient
    *
    * @return object Rdns object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rdnsUpdate($ip, $ptr)
   {
@@ -641,7 +641,7 @@ class Client extends RestClient
    *
    * @param $ip
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function rdnsDelete($ip)
   {
@@ -655,7 +655,7 @@ class Client extends RestClient
    *
    * @return array Array of server objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function serverGetAll()
   {
@@ -671,7 +671,7 @@ class Client extends RestClient
    *
    * @return object Server object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function serverGet($ip)
   {
@@ -688,7 +688,7 @@ class Client extends RestClient
    *
    *  @return object Server object
    *
-   *  @throws RobotClientException
+   *  @throws ClientException
    */
   public function servernameUpdate($ip, $name)
   {
@@ -704,7 +704,7 @@ class Client extends RestClient
    *
    * @return object Cancellation object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function serverCancellationGet($ip)
   {
@@ -722,7 +722,7 @@ class Client extends RestClient
    *
    * @return object Cancellation object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function serverCancel($ip, $cancellationDate, $cancellationReason = null)
   {
@@ -741,7 +741,7 @@ class Client extends RestClient
    *
    * @param $ip Server main ip
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function serverCancellationDelete($ip)
   {
@@ -755,7 +755,7 @@ class Client extends RestClient
    *
    * @return array Array of ip objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function ipGetAll()
   {
@@ -771,7 +771,7 @@ class Client extends RestClient
    *
    * @return array Array of ip objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function ipGetByServerIp($serverIp)
   {
@@ -787,7 +787,7 @@ class Client extends RestClient
    *
    * @return object Ip object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function ipGet($ip)
   {
@@ -803,7 +803,7 @@ class Client extends RestClient
    *
    * @return object Ip object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function ipEnableTrafficWarnings($ip)
   {
@@ -836,7 +836,7 @@ class Client extends RestClient
    *
    * @return object Ip object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function ipSetTrafficWarningLimits($ip, $hourly, $daily, $monthly)
   {
@@ -854,7 +854,7 @@ class Client extends RestClient
    *
    * @return array Array of subnet objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetGetAll()
   {
@@ -870,7 +870,7 @@ class Client extends RestClient
    *
    * @return array Array of subnet objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetGetByServerIp($serverIp)
   {
@@ -886,7 +886,7 @@ class Client extends RestClient
    *
    * @return object Subnet object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetGet($ip)
   {
@@ -902,7 +902,7 @@ class Client extends RestClient
    *
    * @return object Subnet object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetEnableTrafficWarnings($ip)
   {
@@ -918,7 +918,7 @@ class Client extends RestClient
    *
    * @return object Subnet object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetDisableTrafficWarnings($ip)
   {
@@ -937,7 +937,7 @@ class Client extends RestClient
    *
    * @return object Subnet object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetSetTrafficWarningLimits($ip, $hourly, $daily, $monthly)
   {
@@ -960,7 +960,7 @@ class Client extends RestClient
    *
    * @return object Traffic object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function trafficGetForIp($ip, $type, $from, $to)
   {
@@ -982,7 +982,7 @@ class Client extends RestClient
    *
    * @return object Traffic object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function trafficGetForSubnet($subnet, $type, $from, $to)
   {
@@ -1011,7 +1011,7 @@ class Client extends RestClient
    *
    * @return object Traffic object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function trafficGet(array $options)
   {
@@ -1027,7 +1027,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function separateMacGet($ip)
   {
@@ -1043,7 +1043,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function separateMacCreate($ip)
   {
@@ -1059,7 +1059,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function separateMacDelete($ip)
   {
@@ -1075,7 +1075,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetMacGet($ip)
   {
@@ -1092,7 +1092,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetMacSet($ip, $mac)
   {
@@ -1109,7 +1109,7 @@ class Client extends RestClient
    *
    * @return object Mac object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function subnetMacReset($ip)
   {
@@ -1123,7 +1123,7 @@ class Client extends RestClient
    *
    * @return array Array of key objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function keyGetAll()
   {
@@ -1139,7 +1139,7 @@ class Client extends RestClient
    *
    * @return object The key object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function keyGet($fingerprint)
   {
@@ -1156,7 +1156,7 @@ class Client extends RestClient
    *
    * @return object The key object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function keyCreate($name, $data)
   {
@@ -1176,7 +1176,7 @@ class Client extends RestClient
    *
    * @return object The key object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function keyUpdate($fingerprint, $name)
   {
@@ -1192,7 +1192,7 @@ class Client extends RestClient
    *
    * @param $fingerprint The key fingerprint
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function keyDelete($fingerprint)
   {
@@ -1206,7 +1206,7 @@ class Client extends RestClient
    *
    * @return array Array of product objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerProductGetAll()
   {
@@ -1222,7 +1222,7 @@ class Client extends RestClient
    *
    * @return object The product object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerProductGet($productId)
   {
@@ -1236,7 +1236,7 @@ class Client extends RestClient
    *
    * @return array Array of transaction objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerTransactionGetAll()
   {
@@ -1252,7 +1252,7 @@ class Client extends RestClient
    *
    * @return object The transaction object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerTransactionGet($transactionId)
   {
@@ -1273,7 +1273,7 @@ class Client extends RestClient
    *
    * @return object The transaction object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServer($productId, array $authorizedKeys = array(), $password = null, $dist = null, $arch = null, $lang = null, $test = false)
   {
@@ -1312,7 +1312,7 @@ class Client extends RestClient
    *
    * @return array Array of product objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerMarketProductGetAll()
   {
@@ -1328,7 +1328,7 @@ class Client extends RestClient
    *
    * @return object The product object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerMarketProductGet($productId)
   {
@@ -1342,7 +1342,7 @@ class Client extends RestClient
    *
    * @return array Array of transaction objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerMarketTransactionGetAll()
   {
@@ -1358,7 +1358,7 @@ class Client extends RestClient
    *
    * @return object The transaction object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderServerMarketTransactionGet($transactionId)
   {
@@ -1376,7 +1376,7 @@ class Client extends RestClient
    *
    * @return object The transaction object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function orderMarketServer($productId, array $authorizedKeys = array(), $password = null, $test = false)
   {
@@ -1405,7 +1405,7 @@ class Client extends RestClient
    *
    * @return array Array of snapshot objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function snapshotGet($ip)
   {
@@ -1421,7 +1421,7 @@ class Client extends RestClient
    *
    * @return object The snapshot object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function snapshotCreate($ip)
   {
@@ -1436,7 +1436,7 @@ class Client extends RestClient
    * @param $ip
    * @param $id The snapshot id
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function snapshotDelete($ip, $id)
   {
@@ -1451,7 +1451,7 @@ class Client extends RestClient
    * @param $ip
    * @param $id The snapshot id
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function snapshotRevert($ip, $id)
   {
@@ -1468,7 +1468,7 @@ class Client extends RestClient
    * @param $id The snapshot id
    * @param $name new name
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function snapshotNameUpdate($ip, $id, $name)
   {
@@ -1484,7 +1484,7 @@ class Client extends RestClient
    *
    * @return array Array of snapshot objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotGet($id)
   {
@@ -1500,7 +1500,7 @@ class Client extends RestClient
    *
    * @return object|array The snapshot object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotCreate($id)
   {
@@ -1515,7 +1515,7 @@ class Client extends RestClient
    * @param $id
    * @param $name The snapshot name
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotDelete($id, $name)
   {
@@ -1530,7 +1530,7 @@ class Client extends RestClient
    * @param $id
    * @param $name The snapshot name
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotRevert($id, $name)
   {
@@ -1546,7 +1546,7 @@ class Client extends RestClient
    * @param $name The snapshot name
    * @param $comment The snapshot comment
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotSetComment($id, $name, $comment)
   {
@@ -1563,7 +1563,7 @@ class Client extends RestClient
    *
    * @return object The storagebox object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxGet($id)
   {
@@ -1577,7 +1577,7 @@ class Client extends RestClient
    *
    * @return array Array of storagebox objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxGetAll()
   {
@@ -1594,7 +1594,7 @@ class Client extends RestClient
    *
    *  @return object storagebox object
    *
-   *  @throws RobotClientException
+   *  @throws ClientException
    */
   public function storageboxnameUpdate($id, $name)
   {
@@ -1610,7 +1610,7 @@ class Client extends RestClient
    *
    *  @return array Array of directory names
    *
-   *  @throws RobotClientException
+   *  @throws ClientException
    */
   public function storageboxDirectoryListing($id)
   {
@@ -1624,7 +1624,7 @@ class Client extends RestClient
    *
    * @param $ip Server main ip
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vServerStart($ip)
   {
@@ -1638,7 +1638,7 @@ class Client extends RestClient
    *
    * @param $ip Server main ip
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vServerStop($ip)
   {
@@ -1652,7 +1652,7 @@ class Client extends RestClient
    *
    * @param $ip Server main ip
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function vServerShutdown($ip)
   {
@@ -1668,7 +1668,7 @@ class Client extends RestClient
    *
    * @return array Array of snapshot plans objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotPlanGet($id)
   {
@@ -1684,7 +1684,7 @@ class Client extends RestClient
    *
    * @return array Array of snapshot plans objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSnapshotPlanEdit($id, $data)
   {
@@ -1701,7 +1701,7 @@ class Client extends RestClient
    *
    * @return object firewall object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallGet($ip, $port = 'main')
   {
@@ -1736,7 +1736,7 @@ class Client extends RestClient
    *
    * @return object firewall object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallCreateOrUpdate($ip, $status, $whitelistHos, array $rules, $port = 'main')
   {
@@ -1758,7 +1758,7 @@ class Client extends RestClient
    *
    * @return object firewall object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallCreateOrUpdateFromTemplate($ip, $templateId, $port = 'main')
   {
@@ -1775,7 +1775,7 @@ class Client extends RestClient
    * @param $ip Server main IP address
    * @param $port Switch port, only needed when server has multiple ports, e.g. for KVM
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallDelete($ip, $port = 'main')
   {
@@ -1789,7 +1789,7 @@ class Client extends RestClient
    *
    * @return array of firewall template objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateGetAll()
   {
@@ -1823,7 +1823,7 @@ class Client extends RestClient
    *
    * @return firewall template object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateCreate($name, $whitelistHos, $isDefault, $rules)
   {
@@ -1844,7 +1844,7 @@ class Client extends RestClient
    *
    * @return firewall template object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateGet($templateId)
   {
@@ -1879,7 +1879,7 @@ class Client extends RestClient
    *
    * @return firewall template object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateUpdate($templateId, $name, $whitelistHos, $isDefault, $rules)
   {
@@ -1901,7 +1901,7 @@ class Client extends RestClient
    *
    * @return firewall template object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateUpdateName($templateId, $name)
   {
@@ -1917,7 +1917,7 @@ class Client extends RestClient
    *
    * @param $templateId Firewall template ID
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function firewallTemplateDelete($templateId)
   {
@@ -1934,7 +1934,7 @@ class Client extends RestClient
    *
    * @return array Array of sub accounts objects
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSubAccountGet($id)
   {
@@ -1951,7 +1951,7 @@ class Client extends RestClient
    *
    * @return array Array of sub account object
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSubAccountCreate($id, $data)
   {
@@ -1967,7 +1967,7 @@ class Client extends RestClient
    * @param $username
    * @param $data
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSubAccountUpdate($id, $username, $data)
   {
@@ -1983,7 +1983,7 @@ class Client extends RestClient
    *
    * @return string password
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSubAccountResetPassword($id, $username)
   {
@@ -1998,7 +1998,7 @@ class Client extends RestClient
    * @param $id
    * @param $username
    *
-   * @throws RobotClientException
+   * @throws ClientException
    */
   public function storageboxSubAccountDelete($id, $username)
   {
