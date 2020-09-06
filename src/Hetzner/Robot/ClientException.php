@@ -29,7 +29,7 @@ use Exception;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-class ClientException extends Exception
+class RobotClientException extends Exception
 {
   public function __construct($message = null, $code = null)
   {

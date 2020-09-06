@@ -3,7 +3,9 @@
     "description": "API Client for the Hetzner Robot API",
     "version": "1.0.3",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-0": {
