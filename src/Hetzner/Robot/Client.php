@@ -1295,8 +1295,10 @@ class Client extends RestClient
   public function orderServer($productId, $location, array $authorizedKeys = array(), $password = null, $dist = null, $arch = null, $lang = null, $test = false)
   {
     $url = $this->baseUrl . '/order/server/transaction';
-    $data = array('product_id' => $productId);
-    $data['location'] = $location;
+    $data = [
+        'product_id' => $productId,
+        'location' => $location,
+        ];
     if ($authorizedKeys)
     {
       $data['authorized_key'] = $authorizedKeys;
