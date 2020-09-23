@@ -35,17 +35,17 @@ class RestClient
   /**
    * Class constructor
    * 
-   * @param $url      Robot webservice url
-   * @param $login    Robot login name
-   * @param $password Robot password
-   * @param $verbose
+   * @param string $url      Robot webservice url
+   * @param string $user     Robot webservice username
+   * @param string $password Robot password
+   * @param bool $verbose
    */ 
-  public function __construct($url, $login, $password, $verbose = false)
+  public function __construct($url, $user, $password, $verbose = false)
   {
     $this->baseUrl = rtrim($url, '/');
     $this->curl = curl_init();
     $this->setCurlOption(CURLOPT_RETURNTRANSFER, true);
-    $this->setCurlOption(CURLOPT_USERPWD, $login . ':' . $password);
+    $this->setCurlOption(CURLOPT_USERPWD, $user . ':' . $password);
     $this->setCurlOption(CURLOPT_VERBOSE, $verbose);
   }
 
@@ -61,7 +61,7 @@ class RestClient
    * Set a curl option
    *
    * @param $option CURLOPT option constant
-   * @param $value
+   * @param mixed $value
    */
   protected function setCurlOption($option, $value)
   {
@@ -82,8 +82,8 @@ class RestClient
   /**
    * Set a HTTP header
    * 
-   * @param $name
-   * @param $value
+   * @param string $name
+   * @param string $value
    */
   public function setHttpHeader($name, $value)
   {
@@ -93,7 +93,7 @@ class RestClient
   /**
    * Do a GET request
    * 
-   * @param $url
+   * @param string $url
    * @return array Array with keys 'response_code' and 'response'
    *   On error 'response' is false
    */
@@ -109,8 +109,8 @@ class RestClient
   /**
    * Do a POST request
    * 
-   * @param $url
-   * @param $data Post data
+   * @param string $url
+   * @param array $data Post data
    * @return array Array with keys 'response_code' and 'response'
    *   On error 'response' is false
    */
@@ -130,8 +130,8 @@ class RestClient
   /**
    * Do a PUT request
    *
-   * @param $url
-   * @param $data Put data
+   * @param string $url
+   * @param array $data Put data
    * @return array Array with keys 'response_code' and 'response'
    *   On error 'response' is false
    */
@@ -151,15 +151,20 @@ class RestClient
   /**
    * Do a DELETE request
    *
-   * @param $url
+   * @param string $url
+   * @param array $data
    * @return array Array with keys 'response_code' and 'response'
    *   On error 'response' is false
    */
-  protected function delete($url)
+  protected function delete($url, array $data = array())
   {
     $this->setCurlOption(CURLOPT_URL, $url);
     $this->setCurlOption(CURLOPT_HTTPGET, true);
     $this->setCurlOption(CURLOPT_CUSTOMREQUEST, 'DELETE');
+    if ($data)
+    {
+      $this->setCurlOption(CURLOPT_POSTFIELDS, http_build_query($data));
+    }
 
     return $this->executeRequest();
   }
