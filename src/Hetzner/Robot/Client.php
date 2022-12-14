@@ -80,7 +80,11 @@ class Client extends RestClient
 
     if ($result['response_code'] >= 400 && $result['response_code'] <= 503)
     {
-      throw new ClientException($response->error->message, $response->error->code);
+      if (isset($response->error) && isset($response->error->message, $response->error->code)) {
+        throw new ClientException($response->error->message, $response->error->code);
+      } else {
+        throw new ClientException(null, $result['response_code']);
+      }
     }
 
     return $response;
