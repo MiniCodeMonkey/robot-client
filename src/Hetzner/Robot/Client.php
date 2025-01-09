@@ -100,7 +100,7 @@ class Client extends RestClient
    *
    * @throws ClientException
    */
-  public function failoverGet($ip = null, array $query = null)
+  public function failoverGet($ip = null, ?array $query = null)
   {
     $url = $this->baseUrl . '/failover';
 
